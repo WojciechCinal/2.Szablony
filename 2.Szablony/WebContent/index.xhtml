@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>2.Kalkulator kredytowy - szablony</title>
+</h:head>
+<h:body>
+
+	<h1>2.Kalkulator kredytowy - szablony</h1>
+
+	<h:form id="bla">
+  		kwota: <h:inputText value="#{kalkulatorBB.kwota}" />
+		<br />
+  		oprocentowanie (w %): <h:inputText value="#{kalkulatorBB.oprocentowanie}" />
+		<br />
+		czas: <h:selectOneRadio value="#{kalkulatorBB.czas}">
+		<f:selectItem itemValue = "6" itemLabel = "6 miesięcy" /> 
+   		<f:selectItem itemValue = "12" itemLabel = "12 miesięcy" />
+   		<f:selectItem itemValue = "24" itemLabel = "2 lata" /> 
+   		<f:selectItem itemValue = "36" itemLabel = "3 lata" />
+   		<f:selectItem itemValue = "60" itemLabel = "5 lat" /> 
+   		<f:selectItem itemValue = "120" itemLabel = "10 lat" />
+		</h:selectOneRadio>
+		<h:messages id="msg" />
+
+		<h:commandButton value="Oblicz ratę kredytu" action="#{kalkulatorBB.calc()}"/>
+
+		<br />
+		<h:commandLink value="Informacje" action="#{kalkulatorBB.info()}" />
+	</h:form>
+
+</h:body>
+</html>
