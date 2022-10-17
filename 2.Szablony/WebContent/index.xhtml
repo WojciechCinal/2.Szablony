@@ -3,34 +3,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-	<title>2.Kalkulator kredytowy - szablony</title>
-</h:head>
-<h:body>
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-	<h1>2.Kalkulator kredytowy - szablony</h1>
+<ui:composition template="/templates/page-template.xhtml">
 
-	<h:form id="bla">
-  		kwota: <h:inputText value="#{kalkulatorBB.kwota}" />
+	<ui:define name="pageContent">
+	<p:panel header="Kalkulator kredytowy">
+
+	<h:form id="formularz">
+		<h:panelGrid columns="3">
+			<h:outputLabel for="kwota" value="Kwota: " />
+			<p:inputText id="kwota" value="#{kalkulatorBB.kwota}" required="true" requiredMessage="Nie podano kwoty!" />
+			<p:message for="kwota" />
+
+			<h:outputLabel for="oprocentowanie" value="Oprocentowanie: " />
+			<p:inputText id="oprocentowanie" value="#{kalkulatorBB.oprocentowanie}" required="true" requiredMessage="Nie podano oprocentowania!"  />
+			<p:message for="oprocentowanie" />
+
+			<h:outputLabel for="czas" value="Czas spłaty: " />
+			<p:selectOneMenu id="czas" value="#{kalkulatorBB.czas}">
+				<f:selectItem itemValue="6" itemLabel="6 miesięcy" />
+				<f:selectItem itemValue="12" itemLabel="12 miesięcy" />
+				<f:selectItem itemValue="24" itemLabel="2 lata" />
+				<f:selectItem itemValue="36" itemLabel="3 lata" />
+				<f:selectItem itemValue="60" itemLabel="5 lat" />
+				<f:selectItem itemValue="120" itemLabel="10 lat" />
+			</p:selectOneMenu>
+		</h:panelGrid>
+		<p:messages id="msg" />
+
+		<p:commandButton value="Oblicz ratę"
+			action="#{kalkulatorBB.obliczRata()}" update="@form" />
 		<br />
-  		oprocentowanie (w %): <h:inputText value="#{kalkulatorBB.oprocentowanie}" />
-		<br />
-		czas: <h:selectOneRadio value="#{kalkulatorBB.czas}">
-		<f:selectItem itemValue = "6" itemLabel = "6 miesięcy" /> 
-   		<f:selectItem itemValue = "12" itemLabel = "12 miesięcy" />
-   		<f:selectItem itemValue = "24" itemLabel = "2 lata" /> 
-   		<f:selectItem itemValue = "36" itemLabel = "3 lata" />
-   		<f:selectItem itemValue = "60" itemLabel = "5 lat" /> 
-   		<f:selectItem itemValue = "120" itemLabel = "10 lat" />
-		</h:selectOneRadio>
-		<h:messages id="msg" />
-
-		<h:commandButton value="Oblicz ratę kredytu" action="#{kalkulatorBB.calc()}"/>
-
-		<br />
-		<h:commandLink value="Informacje" action="#{kalkulatorBB.info()}" />
 	</h:form>
-
-</h:body>
+	</p:panel>
+	</ui:define>
+</ui:composition>
 </html>
